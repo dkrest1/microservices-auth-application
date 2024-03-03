@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
       "target": "es2022",
-      "module": "Node16",
+      "module": "CommonJS",
       "rootDir": ".",
       "outDir": "./dist",
       "esModuleInterop": true,
       "strict": true,
+      "strictPropertyInitialization": false,
       "forceConsistentCasingInFileNames": true,
+      "experimentalDecorators": true, 
+      "emitDecoratorMetadata": true, 
       "skipLibCheck": true,
       "baseUrl": ".",
       "paths": {
