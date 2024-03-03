@@ -1,0 +1,19 @@
+{
+  "name": "chat-service",
+  "version": "1.0.0",
+  "description": "microservices-chat-service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "websocket",
+    "socket.io",
+    "express",
+    "nodejs",
+    "javascript",
+    "typescript"
+  ],
+  "author": "oluwatosin akande",
+  "license": "MIT"
+}

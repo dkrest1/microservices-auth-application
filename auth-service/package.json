@@ -1,0 +1,22 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "microservices-auth-service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "microservices",
+    "social",
+    "media",
+    "application",
+    "express",
+    "nodejs",
+    "authentication",
+    "javascript",
+    "typescript"
+  ],
+  "author": "oluwatosin akande",
+  "license": "MIT"
+}
