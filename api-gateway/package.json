@@ -1,0 +1,49 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "microservices-auth-service",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && resolve-tspaths",
+    "start": "npm run build && node dist/server",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only ./src/index",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "keywords": [
+    "microservices",
+    "social",
+    "media",
+    "application",
+    "express",
+    "nodejs",
+    "authentication",
+    "javascript",
+    "typescript"
+  ],
+  "author": "oluwatosin akande",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "express": "^4.18.3",
+    "http-proxy": "^1.18.1",
+    "reflect-metadata": "^0.2.1",
+    "resolve-tspaths": "^0.8.18"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "ts-node-dev": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "_moduleAliases": {
+    "@": "./src"
+  }
+}
