@@ -1,6 +1,8 @@
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
-import { DBConfig } from "./configs/db.config";
+import httpProxy  from "http-proxy";
+
+const proxy = httpProxy.createProxyServer();
 
 class Server {
     private app: express.Application
@@ -24,13 +26,23 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        // this.app.use(`/api/auth/`,this.postController.router);
+        this.app.use("/auth/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://localhost:3000"} )
+        })
+        
+        // Route request to the product service
+        this.app.use("/products/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://product:3001"})
+        })
+        
+        // Route request to the order service
+        this.app.use("/orders/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://order:3002"})
+        })
     }
 
     public async start() {
         try {
-            await DBConfig.initialize(); 
-            console.log("Database connected successfully 🪐")
             this.app.listen(this.app.get('port'), () => {
                 console.log(`App is live on port ${this.app.get('port')} 🚀🚀🚀`);
             });
