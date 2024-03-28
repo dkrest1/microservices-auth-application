@@ -1,4 +1,4 @@
-import { UserRepository } from "@/repositories/auth.repository";
+import { UserRepository } from "@/repositories/user.repository";
 import { getConnection } from "typeorm";
 
 export class AuthService {

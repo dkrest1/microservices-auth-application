@@ -1,26 +1,26 @@
-import { UserRepository } from "@/repositories/auth.repository";
+import { UserRepository } from "@/repositories/user.repository";
 import { getConnection } from "typeorm";
 
-export class AuthService {
+export class UserService {
     private userRepository: UserRepository
 
     constructor() {
         this.userRepository = getConnection("blog").getCustomRepository(UserRepository)
     }
 
-    public create() {
+    public async register() {
 
     }
 
-    public get() {
+    public async login() {
 
     }
 
-    public delete() {
+    public async  findOne() {
 
     }
     
-    public find = async () => {
+    public async getMany () {
         const users = await this.userRepository.find()
         return users
     }

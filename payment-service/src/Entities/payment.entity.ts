@@ -6,16 +6,13 @@ export class UserEntity {
     id: number
 
     @Column()
-    username: string;
+    order_id: string;
 
     @Column()
-    fullname: string;
+    amount: string;
 
     @Column()
-    email: string
-
-    @Column()
-    password: string
+    payment_status: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;

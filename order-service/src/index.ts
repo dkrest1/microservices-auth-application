@@ -1,3 +1,4 @@
+import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { DBConfig } from "./configs/db.config";
@@ -32,7 +33,7 @@ class Server {
             await DBConfig.initialize(); 
             console.log("Database connected successfully 🪐")
             this.app.listen(this.app.get('port'), () => {
-                console.log(`App is live on port ${this.app.get('port')} 🚀🚀🚀`);
+                console.log(`Order App is live on port ${this.app.get('port')} 🚀🚀🚀`);
             });
         } catch (error) {
             console.error("Error starting the server:", error);

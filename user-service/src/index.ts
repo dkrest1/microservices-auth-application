@@ -1,13 +1,17 @@
+import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { DBConfig } from "./configs/db.config";
+import UserController from "./controllers/user.controller";
 
 class Server {
     private app: express.Application
+    private userController: UserController
 
     constructor() {
         this.app = express()
         this.configuration()
+        this.userController = new UserController()
         this.routes()
 
     }
@@ -24,7 +28,10 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        // this.app.use(`/api/auth/`,this.postController.router);
+        this.app.use(`/api/auth/`, this.userController.login);
+        this.app.use(`/api/auth/`, this.userController.register);
+        this.app.use(`/api/auth/`, this.userController.findOne);
+        this.app.use(`/api/auth/`, this.userController.getMany);
     }
 
     public async start() {
@@ -32,7 +39,7 @@ class Server {
             await DBConfig.initialize(); 
             console.log("Database connected successfully 🪐")
             this.app.listen(this.app.get('port'), () => {
-                console.log(`App is live on port ${this.app.get('port')} 🚀🚀🚀`);
+                console.log(`User App is live on port ${this.app.get('port')} 🚀🚀🚀`);
             });
         } catch (error) {
             console.error("Error starting the server:", error);

@@ -1,3 +1,4 @@
+import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import httpProxy  from "http-proxy";
@@ -15,7 +16,7 @@ class Server {
     }
 
     public configuration() {
-        this.app.set('port', variables.PORT || 3001)
+        this.app.set('port', variables.GATEWAY_PORT || 3000)
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }));
     }
@@ -26,25 +27,33 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        this.app.use("/auth/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://localhost:3000"} )
+        // Route request to the order service
+        this.app.use("/orders/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://localhost:3001"} )
+        })
+        
+        // Route request to the payment service
+        this.app.use("/payments/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://product:3002"})
         })
         
         // Route request to the product service
         this.app.use("/products/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://product:3001"})
+            proxy.web(req, res, {target: "http://order:3003"})
         })
+
+          // Route request to the user service
+          this.app.use("/users/", (req: Request, res: Response) => {
+            proxy.web(req, res, {target: "http://order:3004"})
+        })
+
         
-        // Route request to the order service
-        this.app.use("/orders/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://order:3002"})
-        })
     }
 
     public async start() {
         try {
             this.app.listen(this.app.get('port'), () => {
-                console.log(`App is live on port ${this.app.get('port')} 🚀🚀🚀`);
+                console.log(`App Gateway is live on port ${this.app.get('port')} 🚀🚀🚀`);
             });
         } catch (error) {
             console.error("Error starting the server:", error);
