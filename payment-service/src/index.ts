@@ -2,13 +2,16 @@ import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { DBConfig } from "./configs/db.config";
+import PaymentController from "./controllers/payment.controller";
 
 class Server {
     private app: express.Application
+    private paymentController: PaymentController
 
     constructor() {
         this.app = express()
         this.configuration()
+        this.paymentController =  new PaymentController()
         this.routes()
 
     }
@@ -24,8 +27,12 @@ class Server {
         this.app.get( "/", (req: Request, res: Response ) => {
             res.send( "Hello world!" );
         });
-
-        // this.app.use(`/api/auth/`,this.postController.router);
+        
+        this.app.use(`/api/auth/`, this.paymentController.create);
+        this.app.use(`/api/auth/`, this.paymentController.findOne);
+        this.app.use(`/api/auth/`, this.paymentController.getMany);
+        this.app.use(`/api/auth/`, this.paymentController.getPaymentOrder);
+        this.app.use(`/api/auth/`, this.paymentController.delete);
     }
 
     public async start() {
