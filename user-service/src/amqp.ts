@@ -1,8 +1,8 @@
-// MessageBroker.js on Products service
-
-const amqp = require("amqplib");
+import amqp, {Channel} from "amqplib"
 
 class MessageBroker {
+  private channel: Channel | null 
+
   constructor() {
     this.channel = null;
   }
@@ -16,13 +16,13 @@ class MessageBroker {
         this.channel = await connection.createChannel();
         await this.channel.assertQueue("products");
         console.log("RabbitMQ connected");
-      } catch (err) {
+      } catch (err: any) {
         console.error("Failed to connect to RabbitMQ:", err.message);
       }
     }, 20000); // delay 10 seconds to wait for RabbitMQ to start
   }
 
-  async publishMessage(queue, message) {
+  async publishMessage(queue: string, message: any) {
     if (!this.channel) {
       console.error("No RabbitMQ channel available.");
       return;
@@ -38,7 +38,7 @@ class MessageBroker {
     }
   }
 
-  async consumeMessage(queue, callback) {
+  async consumeMessage(queue: string, callback: any) {
     if (!this.channel) {
       console.error("No RabbitMQ channel available.");
       return;
@@ -46,10 +46,10 @@ class MessageBroker {
 
     try {
       await this.channel.consume(queue, (message) => {
-        const content = message.content.toString();
-        const parsedContent = JSON.parse(content);
+        const content = message?.content.toString();
+        const parsedContent = JSON.parse(content!);
         callback(parsedContent);
-        this.channel.ack(message);
+        this.channel?.ack(message!);
       });
     } catch (err) {
       console.log(err);
