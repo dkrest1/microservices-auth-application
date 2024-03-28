@@ -1,66 +1,79 @@
-# Microservices Application
+# Ecommerce Microservices Application
 
-## Overview
+## Overview 
+The eCommerce Microservices project is a distributed system architecture composed of several microservices designed to handle various aspects of an eCommerce platform. The system is built using a microservices approach to ensure scalability, flexibility, and maintainability.
 
-Welcome to the Microservices Application repository! This project is a microservices-based architecture designed to [brief description of your application's purpose].
+## Services
+The following microservices are included in the system:
 
-## Table of Contents
+- Order Service: Manages orders, including creation, retrieval, and processing.
+- Product Service: Handles product-related operations such as creation, retrieval, and inventory management.
+- User Service: Responsible for user management, authentication, and authorization.
+- Payment Service: Facilitates payment processing and integrates with external payment gateways.
+- API Gateway: Acts as a single entry point for clients to interact with the system, routing requests to the appropriate microservices.
 
-- [Architecture Overview](#architecture-overview)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Microservices](#microservices)
-  - [1. Auth Service](#1-auth-service)
-  - [2. Chat Service](#2-chat-service)
-  - [3. User Service](#3-user-service)
-- [API Documentation](#api-documentation)
-- [Configuration](#configuration)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Monitoring and Logging](#monitoring-and-logging)
-- [Contributing](#contributing)
-- [License](#license)
+## Technologies
 
-## Architecture Overview
+- Node 20.x
+- Typescript
+- Express
+- PostgreSQL
+- Typeorm
+- amqplib
 
-[Provide a brief overview of your microservices architecture, including key components, communication patterns, and any relevant diagrams.]
+## Database Model Design
+
+[Click the link to view the ER diagram](https://)
 
 ## Getting Started
 
-### Prerequisites
+1. Clone the microservices ecommerce application
 
-[Outline the prerequisites that developers need to have installed or set up before running the application. Include technologies, databases, message brokers, etc.]
+```bash
+$ git clone repo url
+$ cd microservices-ecommerce-application
+```
 
-### Installation
+2. Create a .env file in the various folder root directory 
 
-[Provide step-by-step instructions on how to set up and run the microservices application locally. Include any specific commands, configurations, or environment variable setups.]
+```bash
+$ cd order-service 
+$ touch .env
+```
 
-## Microservices
+4. Copy the contents of .env.sample into the .env file
 
-### 1. Auth Service
+```bash
+$ cp .env.sample .env
+$ cp .env.sample .env
+```
 
-#### Overview
+5. Install necessary packages
 
-The Auth Service is a microservice built with Node.js and Express, designed to handle authentication functionalities in a microservices architecture. This service interacts with RabbitMQ for efficient and scalable communication within the microservices ecosystem.
+```bash
+$ npm install
+```
 
-#### Features
+6. Start or Spin up the server
 
-- User authentication (login and logout)
-- JWT-based token generation and validation
-- Integration with RabbitMQ for inter-service communication
+```bash
+$ npm run dev
+```
 
-#### Prerequisites
+## API documentation
+[Notion Link](https://)
 
-Before running the Auth Service, ensure the following are installed on your system:
+## Contributing
 
-- Node.js
-- npm (Node Package Manager)
-- RabbitMQ
+Contributions to the eCommerce Microservices project are welcome! If you'd like to contribute, please follow these steps:
 
-#### Installation
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes and push them to your fork.
+4. Submit a pull request with a detailed description of your changes.
 
-1. Clone the repository:
+## License
+This project is licensed under the [MIT LICENSE](https://github.com/dkrest1/microservices-ecommerce-application/blob/main/LICENSE).
 
-   ```bash
-   git clone <repository-url>
+## Contact
+For questions or support, contact [TWITTER](https://twitter.com/dkrestdev).
