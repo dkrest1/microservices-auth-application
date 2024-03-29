@@ -1,8 +1,20 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
+
+export enum PaymentMethod {
+    CREDIT_CARD =  'credit_card',
+    DEBIT_CARD = 'debit_card',
+    E_WALLET = 'e_wallet'
+}
+
+export enum PaymentStatus {
+    SUCCESSFUL = 'successful',
+    PENDING = 'pending',
+    FAILED = 'failed'
+}
 @Entity('payments')
 export class PaymentEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number
 
     @Column()
@@ -11,7 +23,17 @@ export class PaymentEntity {
     @Column()
     amount: string;
 
-    @Column()
+    @Column({
+        type: 'enum',
+        enum: PaymentMethod,
+    })
+    payment_method: PaymentMethod;
+
+    @Column({
+        type: 'enum',
+        enum: PaymentStatus,
+        default: PaymentStatus.PENDING
+    })
     payment_status: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

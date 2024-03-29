@@ -1,22 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
+export enum OrderStatus {
+  PENDING = 'pending',
+  PROCESSING = 'processing',
+  SHIPPED = 'shipped',
+  CANCELED = 'canceled',
+}
 @Entity('orders')
 export class OrderEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: number;
 
   @Column()
-  user_id: number;
+  user_id: string;
 
   @Column()
   product_id: string;
 
   @Column()
+  quantity: number;
+
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.PENDING
+  })
+  status: OrderStatus;
+
+  @Column()
   total_price: string;
-
-  // @ManyToOne(() => Product, (product) => product.orders)
-  // product: Product; // ManyToOne relationship with Product
-
+  
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

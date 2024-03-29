@@ -2,13 +2,16 @@ import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { DBConfig } from "./configs/db.config";
+import OrderController from "./controllers/order.controller";
 
 class Server {
     private app: express.Application
+    private orderController: OrderController
 
     constructor() {
         this.app = express()
         this.configuration()
+        this.orderController = new OrderController()
         this.routes()
 
     }
@@ -20,12 +23,17 @@ class Server {
     }
 
     public async routes() {
-        // testing route 
-        this.app.get( "/", (req: Request, res: Response ) => {
+         // testing route 
+         this.app.get( "/", (req: Request, res: Response ) => {
             res.send( "Hello world!" );
         });
 
-        // this.app.use(`/api/auth/`,this.postController.router);
+        this.app.use(`/api/auth/`, this.orderController.create);
+        this.app.use(`/api/auth/`, this.orderController.findOne);
+        this.app.use(`/api/auth/`, this.orderController.getMany);
+        this.app.use(`/api/auth/`, this.orderController.delete);
+        this.app.use(`/api/auth/`, this.orderController.findOrdersProduct);
+        this.app.use(`/api/auth/`, this.orderController.findOrsersByUser);
     }
 
     public async start() {

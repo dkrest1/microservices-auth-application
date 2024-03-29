@@ -2,13 +2,17 @@ import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { DBConfig } from "./configs/db.config";
+import  ProductController  from "./controllers/product.controller";
 
 class Server {
     private app: express.Application
+    private productController: ProductController
 
     constructor() {
         this.app = express()
         this.configuration()
+
+        this.productController = new ProductController()
         this.routes()
 
     }
@@ -25,7 +29,10 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        // this.app.use(`/api/auth/`,this.postController.router);
+        this.app.use(`/api/auth/`, this.productController.create);
+        this.app.use(`/api/auth/`, this.productController.findOne);
+        this.app.use(`/api/auth/`, this.productController.getMany);
+        this.app.use(`/api/auth/`, this.productController.delete);
     }
 
     public async start() {

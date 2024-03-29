@@ -1,7 +1,7 @@
-import { UserRepository } from "@/repositories/user.repository";
+import UserRepository from "@/repositories/user.repository";
 import { getConnection } from "typeorm";
 
-export class UserService {
+export default class UserService {
     private userRepository: UserRepository
 
     constructor() {
