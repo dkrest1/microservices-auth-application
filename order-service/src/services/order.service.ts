@@ -22,12 +22,22 @@ export default class OrderService {
         return users
     }
 
-    public async findOrdersProduct(){
+    public async update(){
+
+    }
+
+    public async getOrdersByUser(){
         const users = await this.orderRepository.find()
         return users
     }
 
-    public async findOrdersByUser(){
+    public async getOrderStatus(){
+    
+        const users = await this.orderRepository.find()
+        return users
+    }
+
+    public async getProductOrders(){
         const users = await this.orderRepository.find()
         return users
     }

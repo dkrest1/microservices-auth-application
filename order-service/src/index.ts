@@ -28,12 +28,14 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        this.app.use(`/api/auth/`, this.orderController.create);
-        this.app.use(`/api/auth/`, this.orderController.findOne);
-        this.app.use(`/api/auth/`, this.orderController.getMany);
-        this.app.use(`/api/auth/`, this.orderController.delete);
-        this.app.use(`/api/auth/`, this.orderController.findOrdersProduct);
-        this.app.use(`/api/auth/`, this.orderController.findOrsersByUser);
+        this.app.post(`/create`, this.orderController.create);
+        this.app.get(`/:orderId`, this.orderController.findOne);
+        this.app.get(`/`, this.orderController.findAll);
+        this.app.patch(`/:orderId`, this.orderController.update);
+        this.app.get(`/:orderId/status`, this.orderController.getOrderStatus);
+        this.app.get(`/:orderId/users/:userId`, this.orderController.getOrdersByUser);
+        this.app.get(`/:orderId/products/:productId`, this.orderController.getProductOrders);
+        this.app.delete(`/:orderId`, this.orderController.delete);
     }
 
     public async start() {

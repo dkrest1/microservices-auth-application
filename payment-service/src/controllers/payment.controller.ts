@@ -19,13 +19,23 @@ export default class PaymentController {
         res.send(users).json()
     }
 
-    public async getMany(_req: Request, res:Response) {
-        const users = await this.paymentService.getMany()
+    public async findAll(_req: Request, res:Response) {
+        const users = await this.paymentService.findAll()
         res.send(users).json()
     }
 
-    public async getPaymentOrder(_req: Request, res:Response) {
-        const users = await this.paymentService.getPaymentOrder()
+    public async getPaymentTransactionId(_req: Request, res:Response) {
+        const users = await this.paymentService.getPaymentTransactionId()
+        res.send(users).json()
+    }
+
+    public async getPaymentStatus(_req: Request, res:Response) {
+        const users = await this.paymentService.getPaymentStatus()
+        res.send(users).json()
+    }
+
+    public async getPaymentByOrderId(_req: Request, res:Response) {
+        const users = await this.paymentService.getPaymentByOrderId()
         res.send(users).json()
     }
 
@@ -33,7 +43,5 @@ export default class PaymentController {
         const users = await this.paymentService.delete()
         res.send(users).json()
     }
-
-   
 
 }

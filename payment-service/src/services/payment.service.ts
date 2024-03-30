@@ -16,14 +16,22 @@ export default class PaymentService {
 
     }
 
-    public async getMany() {
+    public async findAll() {
         const users = await this.paymentRepository.find()
         return users
     }
 
-    public async getPaymentOrder() {
+    public async getPaymentByOrderId() {
         const users = await this.paymentRepository.find()
         return users
+    }
+
+    public async getPaymentTransactionId() {
+
+    }
+
+    public async getPaymentStatus() {
+
     }
 
     public async delete() {

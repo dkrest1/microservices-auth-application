@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { ProductEntity } from "@/Entities/product.entity";
+import { ProductEntity } from "../Entities/product.entity";
 import { myDataSource } from "@/configs/db.config";
 
 export default class ProductService {

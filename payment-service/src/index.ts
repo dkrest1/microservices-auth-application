@@ -28,11 +28,13 @@ class Server {
             res.send( "Hello world!" );
         });
         
-        this.app.use(`/api/auth/`, this.paymentController.create);
-        this.app.use(`/api/auth/`, this.paymentController.findOne);
-        this.app.use(`/api/auth/`, this.paymentController.getMany);
-        this.app.use(`/api/auth/`, this.paymentController.getPaymentOrder);
-        this.app.use(`/api/auth/`, this.paymentController.delete);
+        this.app.post(`/create`, this.paymentController.create);
+        this.app.get(`/:paymentId`, this.paymentController.findOne);
+        this.app.get(`/`, this.paymentController.findAll);
+        this.app.get(`/orders/:orderId`, this.paymentController.getPaymentByOrderId);
+        this.app.get(`/paymentId/status`, this.paymentController.getPaymentStatus);
+        this.app.get(`/transactions/:transactionId`, this.paymentController.getPaymentTransactionId);
+        this.app.delete(`/:paymentId`, this.paymentController.delete);
     }
 
     public async start() {

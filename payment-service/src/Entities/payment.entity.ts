@@ -23,6 +23,9 @@ export class PaymentEntity {
     @Column()
     amount: string;
 
+    @Column()
+    transactionId: string
+
     @Column({
         type: 'enum',
         enum: PaymentMethod,

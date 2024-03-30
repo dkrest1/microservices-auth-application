@@ -9,12 +9,7 @@ export default class OrderController {
         this.orderService = new OrderService()
     }
 
-    public async create(_req: Request, res:Response) {
-        const users = await this.orderService.create()
-        res.send(users).json()
-    }
-
-    public async create(_req: Request, res:Response) {
+    public async create(req: Request, res:Response) {
         const users = await this.orderService.create()
         res.send(users).json()
     }
@@ -24,18 +19,28 @@ export default class OrderController {
         res.send(users).json()
     }
 
-    public async getMany(_req: Request, res:Response) {
-        const users = await this.orderService.getMany()
+    public async findAll(_req: Request, res:Response) {
+        const users = await this.orderService.findAll()
         res.send(users).json()
     }
 
-    public async findOrdersProduct(_req: Request, res:Response) {
-        const users = await this.orderService.findOrdersProduct()
+    public async update(_req: Request, res:Response) {
+        const users = await this.orderService.update()
         res.send(users).json()
     }
 
-    public async findOrsersByUser(_req: Request, res:Response) {
-        const users = await this.orderService.findOrdersByUser()
+    public async getOrderStatus(_req: Request, res:Response) {
+        const users = await this.orderService.getOrderStatus()
+        res.send(users).json()
+    }
+
+    public async getOrdersByUser(_req: Request, res:Response) {
+        const users = await this.orderService.getOrdersByUser()
+        res.send(users).json()
+    }
+
+    public async getProductOrders(_req: Request, res:Response) {
+        const users = await this.orderService.getProductOrders()
         res.send(users).json()
     }
 
