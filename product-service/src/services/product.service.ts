@@ -1,11 +1,12 @@
-import ProductRepository from "@/repositories/product.repository";
-import { getConnection } from "typeorm";
+import { Repository } from "typeorm";
+import { ProductEntity } from "@/Entities/product.entity";
+import { myDataSource } from "@/configs/db.config";
 
 export default class ProductService {
-    private productRepository: ProductRepository
+    private productRepository: Repository<ProductEntity>;
 
     constructor() {
-        this.productRepository = getConnection("blog").getCustomRepository(ProductRepository)
+        this.productRepository = myDataSource.getRepository(ProductEntity)
     }
 
     public async create() {
@@ -17,7 +18,11 @@ export default class ProductService {
         return users
     }
 
-    public async getMany() {
+    public async findAll() {
+
+    }
+
+    public async updateOne() {
 
     }
 

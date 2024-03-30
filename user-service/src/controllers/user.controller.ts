@@ -12,24 +12,36 @@ export default class UserController {
         this.router = Router()
     }
 
-    public register = async (_req: Request, res:Response) => {
+    public async register (_req: Request, res:Response) {
         const users = await this.userService.register()
         res.send(users).json()
     }
 
-    public login = async (_req: Request, res:Response) => {
+    public async login(_req: Request, res:Response) {
         const users = await this.userService.login()
         res.send(users).json()
     }
 
-    public findOne = async (_req: Request, res:Response) => {
+    public async findOne(_req: Request, res:Response) {
         const users = await this.userService.findOne()
         res.send(users).json()
     }
 
-    public getMany = async (_req: Request, res:Response) => {
-        const users = await this.userService.getMany()
+    public async findAll(_req: Request, res:Response) {
+        const users = await this.userService.findAll()
         res.send(users).json()
     }
+
+    public async update(_req: Request, res:Response) {
+        const users = await this.userService.delete()
+        res.send(users).json()
+    }
+
+    public async delete(_req: Request, res:Response) {
+        const users = await this.userService.delete()
+        res.send(users).json()
+    }
+
+    
 
 }

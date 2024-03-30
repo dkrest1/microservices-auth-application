@@ -1,7 +1,7 @@
 import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
-import { DBConfig } from "./configs/db.config";
+import { myDataSource } from "./configs/db.config";
 import OrderController from "./controllers/order.controller";
 
 class Server {
@@ -38,7 +38,7 @@ class Server {
 
     public async start() {
         try {
-            await DBConfig.initialize(); 
+            await myDataSource.initialize(); 
             console.log("Database connected successfully 🪐")
             this.app.listen(this.app.get('port'), () => {
                 console.log(`Order App is live on port ${this.app.get('port')} 🚀🚀🚀`);

@@ -20,8 +20,13 @@ export default class ProductController {
         res.send(users).json()
     }
 
-    public async getMany(_req: Request, res:Response) {
-        const users = await this.productService.getMany()
+    public async findAll(_req: Request, res:Response) {
+        const users = await this.productService.findAll()
+        res.send(users).json()
+    }
+
+    public async updateOne(_req: Request, res:Response) {
+        const users = await this.productService.updateOne()
         res.send(users).json()
     }
 

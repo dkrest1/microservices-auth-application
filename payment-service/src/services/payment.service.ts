@@ -1,11 +1,11 @@
-import PaymentRepository from "@/repositories/payment.repository";
-import { getConnection } from "typeorm";
-
+import { Repository } from "typeorm";
+import { PaymentEntity } from "@/Entities/payment.entity";
+import { myDataSource } from "@/configs/db.config"
 export default class PaymentService {
-    private paymentRepository: PaymentRepository
+    private paymentRepository: Repository<PaymentEntity>;
 
     constructor() {
-        this.paymentRepository = getConnection("blog").getCustomRepository(PaymentRepository)
+        this.paymentRepository = myDataSource.getRepository(PaymentEntity)
     }
 
     public async create() {

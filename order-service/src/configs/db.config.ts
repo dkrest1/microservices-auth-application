@@ -1,7 +1,8 @@
 import { DataSource } from "typeorm"
 import variables from "./constants.config"
+import { OrderEntity } from "@/Entities/order.entity"
 
-export const DBConfig = new DataSource({
+export const myDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -10,7 +11,7 @@ export const DBConfig = new DataSource({
     database: variables.DB_NAME,
     synchronize: true,
     logging: true,
-    entities: [],
+    entities: [OrderEntity],
     subscribers: [],
     migrations: [],
 })

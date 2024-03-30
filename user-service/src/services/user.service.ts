@@ -1,11 +1,12 @@
-import UserRepository from "@/repositories/user.repository";
-import { getConnection } from "typeorm";
+import { Repository } from "typeorm";
+import { UserEntity } from "@/Entities/user.entity";
+import { myDataSource } from "@/configs/db.config";
 
 export default class UserService {
-    private userRepository: UserRepository
+    private userRepository: Repository<UserEntity>;
 
     constructor() {
-        this.userRepository = getConnection("blog").getCustomRepository(UserRepository)
+        this.userRepository = myDataSource.getRepository(UserEntity)
     }
 
     public async register() {
@@ -20,8 +21,16 @@ export default class UserService {
 
     }
     
-    public async getMany () {
+    public async findAll () {
         const users = await this.userRepository.find()
         return users
+    }
+
+    public async update() {
+
+    }
+
+    public async delete() {
+
     }
 }

@@ -23,31 +23,29 @@ class Server {
 
     public async routes() {
         // testing route 
-        this.app.get( "/", (req: Request, res: Response ) => {
-            res.send( "Hello world!" );
+        this.app.get("/", (req: Request, res: Response) => {
+            res.send("Hello world!");
         });
-
+    
         // Route request to the order service
-        this.app.use("/orders/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://localhost:3001"} )
-        })
+        this.app.use("/api/v2/orders/", (req: Request, res: Response) => {
+            proxy.web(req, res, { target: "http://localhost:3001" });
+        });
         
         // Route request to the payment service
-        this.app.use("/payments/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://product:3002"})
-        })
+        this.app.use("/api/v2/payments/", (req: Request, res: Response) => {
+            proxy.web(req, res, { target: "http://product:3002" });
+        });
         
         // Route request to the product service
-        this.app.use("/products/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://order:3003"})
-        })
-
-          // Route request to the user service
-          this.app.use("/users/", (req: Request, res: Response) => {
-            proxy.web(req, res, {target: "http://order:3004"})
-        })
-
-        
+        this.app.use("/api/v2/products/", (req: Request, res: Response) => {
+            proxy.web(req, res, { target: "http://order:3003" });
+        });
+    
+        // Route request to the user service
+        this.app.use("/api/v2/users/", (req: Request, res: Response) => {
+            proxy.web(req, res, { target: "http://order:3004" });
+        });
     }
 
     public async start() {

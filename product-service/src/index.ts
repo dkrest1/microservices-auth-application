@@ -1,7 +1,7 @@
 import "module-alias/register";
 import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
-import { DBConfig } from "./configs/db.config";
+import { myDataSource} from "./configs/db.config";
 import  ProductController  from "./controllers/product.controller";
 
 class Server {
@@ -29,15 +29,16 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        this.app.use(`/api/auth/`, this.productController.create);
-        this.app.use(`/api/auth/`, this.productController.findOne);
-        this.app.use(`/api/auth/`, this.productController.getMany);
-        this.app.use(`/api/auth/`, this.productController.delete);
+        this.app.post(`/create`, this.productController.create);
+        this.app.get(`/:productId`, this.productController.findOne);
+        this.app.get(`/`, this.productController.findAll);
+        this.app.patch(`/:productId`, this.productController.updateOne);
+        this.app.delete(`/:productId`, this.productController.delete);
     }
 
     public async start() {
         try {
-            await DBConfig.initialize(); 
+            await myDataSource.initialize(); 
             console.log("Database connected successfully 🪐")
             this.app.listen(this.app.get('port'), () => {
                 console.log(`Product App is live on port ${this.app.get('port')} 🚀🚀🚀`);

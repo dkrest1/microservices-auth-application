@@ -1,11 +1,12 @@
-import OrderRepository from "@/repositories/order.repository";
-import { getConnection } from "typeorm";
+import { Repository } from "typeorm";
+import { OrderEntity } from "@/Entities/order.entity";
+import { myDataSource } from "@/configs/db.config";
 
 export default class OrderService {
-    private orderRepository: OrderRepository
+    private orderRepository: Repository<OrderEntity>;
 
     constructor() {
-        this.orderRepository = getConnection("blog").getCustomRepository(OrderRepository)
+        this.orderRepository = myDataSource.getRepository(OrderEntity)
     }
 
     public async create() {
@@ -16,7 +17,7 @@ export default class OrderService {
 
     }
 
-    public async getMany(){
+    public async findAll(){
         const users = await this.orderRepository.find()
         return users
     }
