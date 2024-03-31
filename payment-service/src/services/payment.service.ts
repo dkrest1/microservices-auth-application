@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { PaymentEntity } from "@/Entities/payment.entity";
 import { myDataSource } from "@/configs/db.config"
 export default class PaymentService {
+
     private paymentRepository: Repository<PaymentEntity>;
 
     constructor() {
@@ -37,5 +38,4 @@ export default class PaymentService {
     public async delete() {
 
     }
-    
 }
