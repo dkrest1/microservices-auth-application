@@ -1,5 +1,6 @@
 import PaymentService from "@/services/payment.service";
 import { Response, Request } from "express";
+import MessageBroker from "@/message-broker";
 
 export default class PaymentController {
 

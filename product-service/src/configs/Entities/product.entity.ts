@@ -2,17 +2,18 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 
 @Entity('products')
 export class ProductEntity {
+    
     @PrimaryGeneratedColumn("uuid")
-    id: number
+    id: string;
 
     @Column()
     name: string;
 
     @Column()
-    description: string
+    description: string;
 
-    @Column()
-    price: string
+    @Column("decimal", { precision: 10, scale: 2 })
+    price: number
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;

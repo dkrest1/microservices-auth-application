@@ -1,7 +1,5 @@
 import OrderService  from "@/services/order.service";
-import { Response, Request } from "express";
-
-
+import { _Request, _Response } from "@/types";
 
 export default class OrderController {
 
@@ -11,42 +9,49 @@ export default class OrderController {
         this.orderService = new OrderService()
     }
 
-    public async create(req: Request, res:Response) {
-        const users = await this.orderService.create()
-        res.send(users).json()
+    public async create(req: _Request, res: _Response) {
+        try {
+            const userId = req.user.id
+            const {productIds } = req.body; 
+            const order = await this.orderService.create(userId, productIds);
+            res.status(201).json({ success: true, message: 'Order created successfully', data: order });
+        } catch (error: any) {
+            console.error("Error creating order:", error);
+            res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
+        }
     }
 
-    public async findOne(_req: Request, res:Response) {
+    public async findOne(req: _Request, res: _Response) {
         const users = await this.orderService.findOne()
         res.send(users).json()
     }
 
-    public async findAll(_req: Request, res:Response) {
+    public async findAll(req: _Request, res: _Response) {
         const users = await this.orderService.findAll()
         res.send(users).json()
     }
 
-    public async update(_req: Request, res:Response) {
+    public async update(req: _Request, res: _Response) {
         const users = await this.orderService.update()
         res.send(users).json()
     }
 
-    public async getOrderStatus(_req: Request, res:Response) {
+    public async getOrderStatus(req: _Request, res: _Response) {
         const users = await this.orderService.getOrderStatus()
         res.send(users).json()
     }
 
-    public async getOrdersByUser(_req: Request, res:Response) {
+    public async getOrdersByUser(req: _Request, res: _Response) {
         const users = await this.orderService.getOrdersByUser()
         res.send(users).json()
     }
 
-    public async getProductOrders(_req: Request, res:Response) {
+    public async getProductOrders(req: _Request, res: _Response) {
         const users = await this.orderService.getProductOrders()
         res.send(users).json()
     }
 
-    public async delete(_req: Request, res:Response) {
+    public async delete(req: _Request, res: _Response) {
         const users = await this.orderService.delete()
         res.send(users).json()
     }

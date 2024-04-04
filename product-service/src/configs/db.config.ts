@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm"
 import variables from "./constants.config"
-import { ProductEntity } from "../Entities/product.entity"
+import { ProductEntity } from "./Entities/product.entity"
 
 export const myDataSource = new DataSource({
     type: "postgres",

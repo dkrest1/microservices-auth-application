@@ -1,8 +1,8 @@
-import variables from "@/configs/constants.config";
 import { _Request, _Response, _NextFunction } from "@/types";
-import jwt from "jsonwebtoken"
+import { validateToken } from "@/utils/helper.util";
 
 const isAuthenticated = async (req: _Request, res: _Response, next: _NextFunction) =>  {
+
     try {
         if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer')) {
             return res.status(401).json({
@@ -20,15 +20,22 @@ const isAuthenticated = async (req: _Request, res: _Response, next: _NextFunctio
             });
         }
 
-        const decoded = jwt.verify(token, variables.QUEUE_NAME as jwt.Secret)
-        req.user = decoded
-        next()
+        const tokenValidationResult = await validateToken(token);
+
+        if (tokenValidationResult.status !== 200) {
+            return res.status(tokenValidationResult.status).json({
+                status: tokenValidationResult.status,
+                message: tokenValidationResult.message,
+                data: null
+            });
+        }
+
+        req.user = tokenValidationResult.data;
+        next();
         
     }catch (err) {
-        return res.status(401).json({
-            success: false,
-            message: "unauthorized: access to resource denied",
-        });
+        console.error(err);
+        return res.status(500).json({ success: false, message: "Internal server error"});
     }
 }
 

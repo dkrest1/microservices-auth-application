@@ -3,6 +3,8 @@ import express, {Request, Response} from "express";
 import variables from "./configs/constants.config";
 import { myDataSource} from "./configs/db.config";
 import  ProductController  from "./controllers/product.controller";
+import ProductValidator from "./validators/product.validator";
+import isAuthenticated from "./middlewares/auth.middleware";
 
 class Server {
     private app: express.Application
@@ -29,11 +31,11 @@ class Server {
             res.send( "Hello world!" );
         });
 
-        this.app.post(`/create`, this.productController.create);
-        this.app.get(`/:productId`, this.productController.findOne);
-        this.app.get(`/`, this.productController.findAll);
-        this.app.patch(`/:productId`, this.productController.updateOne);
-        this.app.delete(`/:productId`, this.productController.delete);
+        this.app.post(`/create`, isAuthenticated, ProductValidator.validateCreateProduct, this.productController.create.bind(this.productController));
+        this.app.get(`/all`, isAuthenticated, this.productController.findAll.bind(this.productController));
+        this.app.get(`/:productId`, isAuthenticated, ProductValidator.validateID,  this.productController.findOne.bind(this.productController));
+        this.app.patch(`/:productId`, this.productController.updateOne.bind(this.productController));
+        this.app.delete(`/:productId`, this.productController.delete.bind(this.productController));
     }
 
     public async start() {

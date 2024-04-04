@@ -14,8 +14,8 @@ export class OrderEntity {
   @Column()
   user_id: string;
 
-  @Column()
-  product_id: string;
+  @Column("simple-array")
+  product_ids: string[];
 
   @Column()
   quantity: number;
