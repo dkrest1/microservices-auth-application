@@ -1,7 +1,7 @@
 {
   "name": "auth-service",
   "version": "1.0.0",
-  "description": "microservices-auth-service",
+  "description": "microservices-product-service",
   "main": "index.js",
   "scripts": {
     "build": "tsc && resolve-tspaths",
